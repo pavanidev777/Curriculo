@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Currículo — Emanuel Pavani</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --accent: #c8a96e;
+      --text: #f0ece4;
+      --muted: #888;
+      --white: #fff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    #page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 60px 40px 80px;
+    }
+
+    .cv-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: end;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 40px;
+      margin-bottom: 50px;
+      animation: fadeUp .6s ease both;
+    }
+
+    .cv-header .name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      color: var(--white);
+    }
+
+    .cv-header .role {
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-top: 10px;
+      font-weight: 400;
+    }
+
+    .cv-header .contact-block {
+      text-align: right;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+    .cv-header .contact-block a { color: var(--accent); text-decoration: none; }
+    .cv-header .contact-block a:hover { text-decoration: underline; }
+
+    .photo-wrapper { width: 110px; height: 110px; margin-left: auto; margin-bottom: 16px; }
+    .photo-wrapper img {
+      width: 110px; height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+      display: block;
+    }
+
+    .cv-body {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0 50px;
+    }
+
+    .sidebar { border-right: 1px solid var(--border); padding-right: 40px; }
+
+    .section { margin-bottom: 42px; animation: fadeUp .6s ease both; }
+    .section:nth-child(1) { animation-delay: .1s; }
+    .section:nth-child(2) { animation-delay: .2s; }
+    .section:nth-child(3) { animation-delay: .3s; }
+    .section:nth-child(4) { animation-delay: .4s; }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .tag {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .exp-item { margin-bottom: 30px; position: relative; padding-left: 18px; }
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 7px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .exp-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+    .exp-meta { font-size: 12px; color: var(--accent); letter-spacing: .06em; margin-bottom: 8px; }
+    .exp-desc { font-size: 13.5px; line-height: 1.7; color: #aaa; }
+
+    .about-text { font-size: 14px; line-height: 1.85; color: #aaa; }
+
+    .lang-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .lang-name { font-size: 13px; }
+    .lang-level { font-size: 11px; color: var(--accent); letter-spacing: .08em; }
+
+    /* ── CERT CARDS ── */
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+    }
+    .cert-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .cert-info { font-size: 11px; color: var(--muted); line-height: 1.6; }
+    .cert-info span { color: var(--accent); }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(18px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    @media print {
+      body { background: #fff; color: #111; }
+      :root { --bg:#fff; --surface:#f5f5f5; --border:#ddd; --accent:#8a6d3b; --text:#111; --muted:#555; --white:#000; }
+      #page { padding: 30px 20px; }
+      .cv-header, .cv-body, .section { animation: none; }
+    }
+  </style>
+</head>
+<body>
+<div id="page">
+
+  <div class="cv-header">
+    <div>
+      <div class="name">Emanuel Pavani Alves Garcia</div>
+      <div class="role">3° Ano do Ensino Médio (AMS) / Técnico</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="photo-wrapper">
+        <img src="Eu.jpeg" alt="Foto"/>
+      </div>
+      <div class="contact-block">
+        <div>📧 emanuelpavanicontato@gmail.com</div>
+        <div>📱 (18) 98109-8840</div>
+        <div>📍 Araçatuba, São Paulo</div>
+        <div><a href="https://linkedin.com/in/seuperfil" target="_blank">linkedin.com/in/seuperfil</a></div>
+        <div><a href="https://github.com/pavanidev777" target="_blank">github.com/pavanidev777</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cv-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="section">
+        <div class="section-label">Habilidades</div>
+        <div class="tags">
+          <span class="tag">HTML &amp; CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">C++ / Arduino</span>
+          <span class="tag">ESP32</span>
+          <span class="tag">IoT</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Idiomas</div>
+        <div class="lang-item">
+          <span class="lang-name">Português</span>
+          <span class="lang-level">Nativo</span>
+        </div>
+        <div class="lang-item">
+          <span class="lang-name">Inglês</span>
+          <span class="lang-level">Intermediário</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Formação</div>
+        <div class="exp-item">
+          <div class="exp-title">Ensino Médio com Habilitação Técnica (AMS)</div>
+          <div class="exp-meta">Etec/Fatec · 2024 – 2026</div>
+        </div>
+      </div>
+
+      <!-- CERTIFICADOS -->
+      <div class="section">
+        <div class="section-label">Certificados</div>
+
+        <div class="cert-card">
+          <div class="cert-name">Soluções Integradas com IoT</div>
+          <div class="cert-info">
+            <span>SENAI – Escola "Duque de Caxias"</span><br>
+            60 horas · Ago – Set 2025<br>
+            Araçatuba, SP
+          </div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-name">Hackathon Brand Book – CIT</div>
+          <div class="cert-info">
+            <span>Centro de Inovação Tecnológica de Araçatuba</span><br>
+            8 horas · 8 nov 2025<br>
+            UNIP, Araçatuba, SP
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main>
+
+      <!-- SOBRE -->
+      <div class="section">
+        <div class="section-label">Sobre</div>
+        <div class="about-text">
+          Estudante do 3° ano do Ensino Médio com Habilitação Técnica em Automação de Manufatura (AMS) pela Etec, com interesse em desenvolvimento de sistemas embarcados, IoT e desenvolvimento web. Certificado pelo SENAI no curso de <strong style="color:var(--accent); font-weight:500;">Soluções Integradas com IoT</strong> (60h), com capacidade de integrar sensores, atuadores e plataformas em nuvem. Participou do <strong style="color:var(--accent); font-weight:500;">Hackathon Brand Book</strong> promovido pelo Centro de Inovação Tecnológica de Araçatuba (CIT), demonstrando proatividade e habilidade para resolver problemas em equipe sob pressão. Busca sua primeira oportunidade profissional na área de tecnologia.
+        </div>
+      </div>
+
+      <!-- EXPERIÊNCIA -->
+      <div class="section">
+        <div class="section-label">Experiência</div>
+        <div class="exp-item">
+          <div class="exp-title">Sem experiência profissional formal</div>
+          <div class="exp-meta">Em busca da primeira oportunidade</div>
+          <div class="exp-desc">Apesar de ainda não ter experiência profissional, desenvolvi projetos práticos com hardware e software durante o curso técnico, incluindo participação em hackathon e cursos extracurriculares certificados.</div>
+        </div>
+      </div>
+
+      <!-- PROJETOS -->
+      <div class="section">
+        <div class="section-label">Projetos</div>
+
+        <div class="exp-item">
+          <div class="exp-title">Sistema de Detecção de Incêndio (TCC)</div>
+          <div class="exp-meta">ESP32, C++, DHT22 · 2026</div>
+          <div class="exp-desc">Sistema embarcado com ESP32 para detecção de incêndio em lavouras, utilizando sensores de temperatura, umidade, fumaça e chama, com alarme sonoro automático.</div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-title">Sistema de Regulagem de Temperatura (Fetesp 2025)</div>
+          <div class="exp-meta">Arduino · 2025</div>
+          <div class="exp-desc">Sistema de controle de temperatura para ambientes de criação de porcos e galinhas, desenvolvido para a Fetesp 2025.</div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>
